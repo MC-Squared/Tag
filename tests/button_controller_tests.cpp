@@ -32,6 +32,12 @@ TEST_F(ButtonControllerTest, runDoesNothingWhenNoPress)
     EXPECT_CALL(gun_m_m, decrement_clip())
         .Times(0);
 
+    EXPECT_CALL(gun_m_m, reload())
+        .Times(0);
+
+    EXPECT_CALL(gun_m_m, toggle_mode())
+        .Times(0);
+
     button_c->run();
 }
 

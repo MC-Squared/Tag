@@ -3,7 +3,7 @@
 
 class ButtonHardwareMock : public ButtonHardware {
  public:
-     ButtonHardwareMock() {};
-  MOCK_METHOD1(init, void(uint8_t gpio));
-  MOCK_METHOD0(is_pressed, bool());
+     //ButtonHardwareMock() {};
+     MOCK_METHOD0(init, void());
+     MOCK_METHOD0(get_pressed, uint8_t());
 };
