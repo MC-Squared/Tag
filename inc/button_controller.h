@@ -9,11 +9,11 @@ class ButtonController : BaseController {
 public:
     ButtonController(ButtonHardware* buttons, GunModel* gun);
 
-    void init() {};
+    virtual void init() {};
 
-    void run();
+    virtual void run();
 
-    void update() {};
+    virtual void update() {};
 
 private:
     bool is_pressed(uint8_t bitmap, button_t button);

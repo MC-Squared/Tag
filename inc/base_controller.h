@@ -4,7 +4,7 @@
 class BaseController {
 public:
     virtual ~BaseController() {}
-    
+
     //Called once at startup
     virtual void init() = 0;
 
