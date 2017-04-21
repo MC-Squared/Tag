@@ -6,10 +6,6 @@ ButtonController::ButtonController(ButtonHardware* buttons, GunModel* gun)
     m_gun = gun;
 }
 
-void ButtonController::init()
-{
-}
-
 void ButtonController::run()
 {
     uint8_t pressed = m_buttons->get_pressed();
@@ -28,11 +24,6 @@ void ButtonController::run()
     {
         m_gun->toggle_mode();
     }
-}
-
-void ButtonController::interrupt()
-{
-
 }
 
 bool ButtonController::is_pressed(uint8_t bitmap, button_t button)
