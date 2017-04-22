@@ -8,20 +8,20 @@ using ::testing::_;
 using ::testing::Return;
 
 class ButtonControllerTest : public ::testing::Test {
- protected:
-  virtual void SetUp() {
-    button_c = new ButtonController(&button_h_m, &gun_m_m);
-    button_c->init();
-  }
+protected:
+    virtual void SetUp() {
+        button_c = new ButtonController(&button_h_m, &gun_m_m);
+        button_c->init();
+    }
 
-  virtual void TearDown() {
-      delete button_c;
-      button_c = NULL;
-  }
+    virtual void TearDown() {
+        delete button_c;
+        button_c = NULL;
+    }
 
-  ButtonHardwareMock    button_h_m;
-  GunModelMock          gun_m_m;
-  ButtonController*     button_c;
+    ButtonHardwareMock    button_h_m;
+    GunModelMock          gun_m_m;
+    ButtonController*     button_c;
 };
 
 TEST_F(ButtonControllerTest, runDoesNothingWhenNoPress)

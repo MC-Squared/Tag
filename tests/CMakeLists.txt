@@ -30,9 +30,11 @@ execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
 
        set(SOURCE_FILES ${SOURCE_FILES}
            ${LaserTag_SOURCE_DIR}/src/button_controller.cpp
+           ${LaserTag_SOURCE_DIR}/src/ir_controller.cpp
            ${LaserTag_SOURCE_DIR}/src/gun_model.cpp
            button_controller_tests.cpp
            gun_model_tests.cpp
+           ir_controller_tests.cpp
            )
 
        # Now simply link against gtest or gtest_main as needed. Eg

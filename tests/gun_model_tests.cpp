@@ -8,17 +8,17 @@ using ::testing::Return;
 //
 
 class GunModelTest : public ::testing::Test {
- protected:
-  virtual void SetUp() {
-      gun_m = new GunModel(100, 5);
-  }
+protected:
+    virtual void SetUp() {
+        gun_m = new GunModel(100, 5);
+    }
 
-  virtual void TearDown() {
-      delete gun_m;
-      gun_m = NULL;
-  }
+    virtual void TearDown() {
+        delete gun_m;
+        gun_m = NULL;
+    }
 
-  GunModel*  gun_m;
+    GunModel*  gun_m;
 };
 
 TEST_F(GunModelTest, decrementClipReturnsCorrectValue)
