@@ -11,6 +11,7 @@ class GunModelTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
         gun_m = new GunModel(100, 5);
+        gun_m->set_gun_mode(GUN_MODE_NORMAL);
     }
 
     virtual void TearDown() {
@@ -43,6 +44,19 @@ TEST_F(GunModelTest, decrementClipDoesNotGoNegative)
     EXPECT_EQ(0, gun_m->get_current_clip());
     EXPECT_FALSE(gun_m->decrement_clip());
     EXPECT_EQ(0, gun_m->get_current_clip());
+}
+
+TEST_F(GunModelTest, decrementClipIgnoredUnlessNormalMode)
+{
+    EXPECT_EQ(5, gun_m->get_current_clip());
+    gun_m->set_gun_mode(GUN_MODE_PREGAME);
+    EXPECT_FALSE(gun_m->decrement_clip());
+    gun_m->set_gun_mode(GUN_MODE_SHIELD);
+    EXPECT_FALSE(gun_m->decrement_clip());
+    gun_m->set_gun_mode(GUN_MODE_RELOAD);
+    EXPECT_FALSE(gun_m->decrement_clip());
+    gun_m->set_gun_mode(GUN_MODE_GAMEOVER);
+    EXPECT_FALSE(gun_m->decrement_clip());
 }
 
 TEST_F(GunModelTest, reloadUpdatesEmptyClip)
@@ -84,6 +98,8 @@ TEST_F(GunModelTest, reloadUpdatesPartialClip)
 TEST_F(GunModelTest, reloadUpdatesWithLowAmmo)
 {
     GunModel gm(8, 5);
+    gm.set_gun_mode(GUN_MODE_NORMAL);
+
     EXPECT_EQ(5, gm.get_current_clip());
     for(int i = 0; i < 5; i++)
     {
@@ -117,4 +133,18 @@ TEST_F(GunModelTest, queBulletDoesNotExceedClipSize)
     }
     EXPECT_EQ(5, gun_m->get_bullet_que());
     EXPECT_FALSE(gun_m->que_bullet());
+}
+
+TEST_F(GunModelTest, queBulletOnlyInNormalMode)
+{
+    EXPECT_EQ(0, gun_m->get_bullet_que());
+    gun_m->set_gun_mode(GUN_MODE_PREGAME);
+    EXPECT_FALSE(gun_m->que_bullet());
+    gun_m->set_gun_mode(GUN_MODE_SHIELD);
+    EXPECT_FALSE(gun_m->que_bullet());
+    gun_m->set_gun_mode(GUN_MODE_RELOAD);
+    EXPECT_FALSE(gun_m->que_bullet());
+    gun_m->set_gun_mode(GUN_MODE_GAMEOVER);
+    EXPECT_FALSE(gun_m->que_bullet());
+    EXPECT_EQ(0, gun_m->get_bullet_que());
 }

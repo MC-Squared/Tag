@@ -15,6 +15,9 @@ class GunModelMock : public GunModel {
      MOCK_METHOD0(reload, void());
      MOCK_METHOD0(toggle_fire_mode, void());
 
+     MOCK_METHOD1(set_gun_mode, void(GunMode));
+     
+     MOCK_METHOD0(get_gun_mode, GunMode());
      MOCK_METHOD0(get_bullet_que, uint8_t());
 };
 

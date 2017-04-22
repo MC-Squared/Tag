@@ -7,12 +7,13 @@ GunModel::GunModel(uint16_t ammo, uint8_t clip_size)
     m_current_clip = 0;
     m_bullet_que = 0;
     m_fire_mode = FIRE_MODE_SINGLE;
+    m_gun_mode = GUN_MODE_PREGAME;
     this->reload();
 };
 
 bool GunModel::decrement_clip()
 {
-    if (m_current_clip > 0)
+    if (m_current_clip > 0 && m_gun_mode == GUN_MODE_NORMAL)
     {
         m_current_clip--;
         return true;
@@ -23,6 +24,9 @@ bool GunModel::decrement_clip()
 
 bool GunModel::que_bullet()
 {
+    if (m_gun_mode != GUN_MODE_NORMAL)
+        return false;
+    
     m_bullet_que++;
     if (m_bullet_que > m_current_clip)
     {

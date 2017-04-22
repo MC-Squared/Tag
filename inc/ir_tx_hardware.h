@@ -8,6 +8,7 @@ public:
 
     virtual void init() {};
 
+    //Transmit the given number of bits over IR
     virtual bool send(uint32_t bullet, uint8_t bullet_len) {};
 };
 

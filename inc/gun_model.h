@@ -8,6 +8,14 @@ enum FireMode {
     FIRE_MODE_AUTO
 };
 
+enum GunMode {
+    GUN_MODE_NORMAL = 0,
+    GUN_MODE_RELOAD,
+    GUN_MODE_SHIELD,
+    GUN_MODE_PREGAME,
+    GUN_MODE_GAMEOVER
+};
+
 class GunModel {
 public:
     GunModel(uint16_t ammo, uint8_t clip_size);
@@ -28,6 +36,9 @@ public:
     //Single->burst->auto->single...
     virtual void toggle_fire_mode();
 
+    //Setters
+    virtual void set_gun_mode(GunMode mode) { m_gun_mode = mode; }
+
     // Getters
     virtual uint8_t get_current_clip() { return m_current_clip; };
 
@@ -37,12 +48,16 @@ public:
 
     virtual FireMode get_fire_mode() { return m_fire_mode; };
 
+    virtual GunMode get_gun_mode() { return m_gun_mode; };
+
 private:
     uint8_t     m_clip_size;    //No. of bullets the clip holds when full
     uint8_t     m_current_clip; //No. of bullets in the clip currently
     uint8_t     m_bullet_que;   //No. of bullets that should be fired
     uint16_t    m_ammo;         //No. of bullets remaining (excluding current clip)
+
     FireMode    m_fire_mode;
+    GunMode     m_gun_mode;
 };
 
 #endif //__GUN_MODEL_H__

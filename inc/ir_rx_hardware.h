@@ -8,7 +8,9 @@ public:
 
     virtual void init() {};
 
-    virtual bool receive(uint32_t* received) {};
+    virtual bool has_bullet() {};
+
+    virtual uint32_t get_bullet() {};
 };
 
 #endif //__IR_RX_HARDWARE_H__
