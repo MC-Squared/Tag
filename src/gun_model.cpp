@@ -6,7 +6,7 @@ GunModel::GunModel(uint16_t ammo, uint8_t clip_size)
     m_clip_size = clip_size;
     m_current_clip = 0;
     m_bullet_que = 0;
-    m_mode = MODE_SINGLE;
+    m_fire_mode = FIRE_MODE_SINGLE;
     this->reload();
 };
 
@@ -43,18 +43,18 @@ void GunModel::reload()
     m_current_clip = take_ammo;
 }
 
-void GunModel::toggle_mode()
+void GunModel::toggle_fire_mode()
 {
-    switch(m_mode)
+    switch(m_fire_mode)
     {
-        case MODE_SINGLE:
-            m_mode = MODE_BURST;
+        case FIRE_MODE_SINGLE:
+            m_fire_mode = FIRE_MODE_BURST;
             break;
-        case MODE_BURST:
-            m_mode = MODE_AUTO;
+        case FIRE_MODE_BURST:
+            m_fire_mode = FIRE_MODE_AUTO;
             break;
         default:
-            m_mode = MODE_SINGLE;
+            m_fire_mode = FIRE_MODE_SINGLE;
             break;
     }
 }

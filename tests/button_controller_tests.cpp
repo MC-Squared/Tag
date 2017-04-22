@@ -61,13 +61,13 @@ TEST_F(ButtonControllerTest, runCallsReloadOnReload)
     button_c->run();
 }
 
-TEST_F(ButtonControllerTest, runChangesModeOnMode)
+TEST_F(ButtonControllerTest, runChangesFireModeOnMode)
 {
     EXPECT_CALL(button_h_m, get_pressed())
         .Times(1)
         .WillOnce(Return(BUTTON_MODE));
 
-    EXPECT_CALL(gun_m_m, toggle_mode())
+    EXPECT_CALL(gun_m_m, toggle_fire_mode())
         .Times(1);
 
     button_c->run();

@@ -22,7 +22,7 @@ void ButtonController::run()
 
     if (this->is_pressed(pressed, BUTTON_MODE))
     {
-        m_gun->toggle_mode();
+        m_gun->toggle_fire_mode();
     }
 }
 

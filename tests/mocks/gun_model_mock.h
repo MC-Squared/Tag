@@ -10,5 +10,5 @@ class GunModelMock : public GunModel {
      MOCK_METHOD0(decrement_clip, bool());
      MOCK_METHOD0(que_bullet, bool());
      MOCK_METHOD0(reload, void());
-     MOCK_METHOD0(toggle_mode, void());
+     MOCK_METHOD0(toggle_fire_mode, void());
 };

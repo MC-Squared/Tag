@@ -97,13 +97,13 @@ TEST_F(GunModelTest, reloadUpdatesWithLowAmmo)
 
 TEST_F(GunModelTest, toggleModeCorrectlyToggles)
 {
-    EXPECT_EQ(MODE_SINGLE, gun_m->get_mode());
-    gun_m->toggle_mode();
-    EXPECT_EQ(MODE_BURST, gun_m->get_mode());
-    gun_m->toggle_mode();
-    EXPECT_EQ(MODE_AUTO, gun_m->get_mode());
-    gun_m->toggle_mode();
-    EXPECT_EQ(MODE_SINGLE, gun_m->get_mode());
+    EXPECT_EQ(FIRE_MODE_SINGLE, gun_m->get_fire_mode());
+    gun_m->toggle_fire_mode();
+    EXPECT_EQ(FIRE_MODE_BURST, gun_m->get_fire_mode());
+    gun_m->toggle_fire_mode();
+    EXPECT_EQ(FIRE_MODE_AUTO, gun_m->get_fire_mode());
+    gun_m->toggle_fire_mode();
+    EXPECT_EQ(FIRE_MODE_SINGLE, gun_m->get_fire_mode());
 }
 
 TEST_F(GunModelTest, queBulletDoesNotExceedClipSize)
