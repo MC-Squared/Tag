@@ -12,7 +12,7 @@ void ButtonController::run()
 
     if (this->is_pressed(pressed, BUTTON_TRIGGER))
     {
-        m_gun->decrement_clip();
+        m_gun->que_bullet();
     }
 
     if (this->is_pressed(pressed, BUTTON_RELOAD))

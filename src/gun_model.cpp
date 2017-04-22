@@ -5,6 +5,7 @@ GunModel::GunModel(uint16_t ammo, uint8_t clip_size)
     m_ammo = ammo;
     m_clip_size = clip_size;
     m_current_clip = 0;
+    m_bullet_que = 0;
     m_mode = MODE_SINGLE;
     this->reload();
 };
@@ -18,6 +19,18 @@ bool GunModel::decrement_clip()
     }
 
     return false;
+}
+
+bool GunModel::que_bullet()
+{
+    m_bullet_que++;
+    if (m_bullet_que > m_current_clip)
+    {
+        m_bullet_que = m_current_clip;
+        return false;
+    }
+
+    return true;
 }
 
 void GunModel::reload()

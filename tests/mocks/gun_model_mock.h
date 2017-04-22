@@ -8,6 +8,7 @@ class GunModelMock : public GunModel {
  public:
      GunModelMock() : GunModel(DEFAULT_AMMO, DEFAULT_CLIP) {};
      MOCK_METHOD0(decrement_clip, bool());
+     MOCK_METHOD0(que_bullet, bool());
      MOCK_METHOD0(reload, void());
      MOCK_METHOD0(toggle_mode, void());
 };

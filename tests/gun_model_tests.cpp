@@ -35,10 +35,13 @@ TEST_F(GunModelTest, decrementClipReturnsCorrectValue)
 TEST_F(GunModelTest, decrementClipDoesNotGoNegative)
 {
     EXPECT_EQ(5, gun_m->get_current_clip());
+    EXPECT_TRUE(gun_m->decrement_clip());
     for(int i = 0; i < 10; i++)
     {
         gun_m->decrement_clip();
     }
+    EXPECT_EQ(0, gun_m->get_current_clip());
+    EXPECT_FALSE(gun_m->decrement_clip());
     EXPECT_EQ(0, gun_m->get_current_clip());
 }
 
@@ -101,12 +104,17 @@ TEST_F(GunModelTest, toggleModeCorrectlyToggles)
     EXPECT_EQ(MODE_AUTO, gun_m->get_mode());
     gun_m->toggle_mode();
     EXPECT_EQ(MODE_SINGLE, gun_m->get_mode());
-    /*for(int i = 0; i < 5; i++)
-    {
-        gm.decrement_clip();
-    }
-    gm.reload();
+}
 
-    EXPECT_EQ(3, gm.get_current_clip());
-    EXPECT_EQ(0, gm.get_remaining_ammo());*/
+TEST_F(GunModelTest, queBulletDoesNotExceedClipSize)
+{
+    EXPECT_EQ(0, gun_m->get_bullet_que());
+    EXPECT_TRUE(gun_m->que_bullet());
+    EXPECT_EQ(1, gun_m->get_bullet_que());
+    for(int i = 0; i < 7; i++)
+    {
+        gun_m->que_bullet();
+    }
+    EXPECT_EQ(5, gun_m->get_bullet_que());
+    EXPECT_FALSE(gun_m->que_bullet());
 }

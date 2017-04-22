@@ -11,6 +11,7 @@ class ButtonControllerTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
     button_c = new ButtonController(&button_h_m, &gun_m_m);
+    button_c->init();
   }
 
   virtual void TearDown() {
@@ -32,22 +33,16 @@ TEST_F(ButtonControllerTest, runDoesNothingWhenNoPress)
     EXPECT_CALL(gun_m_m, decrement_clip())
         .Times(0);
 
-    EXPECT_CALL(gun_m_m, reload())
-        .Times(0);
-
-    EXPECT_CALL(gun_m_m, toggle_mode())
-        .Times(0);
-
     button_c->run();
 }
 
-TEST_F(ButtonControllerTest, runDecrementsClipAmmoOnTrigger)
+TEST_F(ButtonControllerTest, runQuesBulletOnTrigger)
 {
     EXPECT_CALL(button_h_m, get_pressed())
         .Times(1)
         .WillOnce(Return(BUTTON_TRIGGER));
 
-    EXPECT_CALL(gun_m_m, decrement_clip())
+    EXPECT_CALL(gun_m_m, que_bullet())
         .Times(1)
         .WillOnce(Return(true));
 
