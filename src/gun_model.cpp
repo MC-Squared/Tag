@@ -8,7 +8,8 @@ GunModel::GunModel(uint16_t ammo, uint8_t clip_size)
     m_bullet_que = 0;
     m_fire_mode = FIRE_MODE_SINGLE;
     m_gun_mode = GUN_MODE_PREGAME;
-    this->reload();
+    m_current_clip = clip_size;
+    m_ammo -= m_current_clip;
 };
 
 bool GunModel::decrement_clip()
@@ -26,7 +27,7 @@ bool GunModel::que_bullet()
 {
     if (m_gun_mode != GUN_MODE_NORMAL)
         return false;
-    
+
     m_bullet_que++;
     if (m_bullet_que > m_current_clip)
     {
@@ -37,14 +38,19 @@ bool GunModel::que_bullet()
     return true;
 }
 
-void GunModel::reload()
+bool GunModel::reload()
 {
+    if (m_gun_mode != GUN_MODE_NORMAL)
+        return false;
+
+    m_gun_mode = GUN_MODE_RELOAD;
     uint16_t take_ammo = m_clip_size;
     if (m_ammo < take_ammo)
         take_ammo = m_ammo;
 
     m_ammo -= (take_ammo - m_current_clip);
     m_current_clip = take_ammo;
+    return true;
 }
 
 void GunModel::toggle_fire_mode()

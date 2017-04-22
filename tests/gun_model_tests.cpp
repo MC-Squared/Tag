@@ -111,6 +111,21 @@ TEST_F(GunModelTest, reloadUpdatesWithLowAmmo)
     EXPECT_EQ(0, gm.get_remaining_ammo());
 }
 
+TEST_F(GunModelTest, reloadOnlyInNormalMode)
+{
+    gun_m->set_gun_mode(GUN_MODE_PREGAME);
+    EXPECT_FALSE(gun_m->reload());
+    gun_m->set_gun_mode(GUN_MODE_SHIELD);
+    EXPECT_FALSE(gun_m->reload());
+    gun_m->set_gun_mode(GUN_MODE_GAMEOVER);
+    EXPECT_FALSE(gun_m->reload());
+    gun_m->set_gun_mode(GUN_MODE_RELOAD);
+    EXPECT_FALSE(gun_m->reload());
+    gun_m->set_gun_mode(GUN_MODE_NORMAL);
+    EXPECT_TRUE(gun_m->reload());
+    EXPECT_EQ(GUN_MODE_RELOAD, gun_m->get_gun_mode());
+}
+
 TEST_F(GunModelTest, toggleModeCorrectlyToggles)
 {
     EXPECT_EQ(FIRE_MODE_SINGLE, gun_m->get_fire_mode());

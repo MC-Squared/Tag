@@ -30,7 +30,7 @@ public:
     virtual bool que_bullet();
 
     //resets current clip, decrements ammo
-    virtual void reload();
+    virtual bool reload();
 
     //Toggle firing mode
     //Single->burst->auto->single...
