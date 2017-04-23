@@ -11,11 +11,11 @@ public:
     virtual void reset_health() { m_current_health = m_max_health; };
 
     // Getters
-    virtual uint8_t get_max_health() { return m_max_health; };
+    virtual uint8_t get_max_health() { return m_max_health; }; /*LCOV_EXCL_LINE*/
 
     virtual uint8_t get_current_health() { return m_current_health; };
 
-    virtual uint8_t get_team() { return m_team; };
+    virtual uint8_t get_team() { return m_team; }; /*LCOV_EXCL_LINE*/
 
 private:
     uint8_t     m_max_health;       //Maximum health for this player

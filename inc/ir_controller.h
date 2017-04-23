@@ -15,11 +15,11 @@ public:
         GunModel* gun,
         PlayerModel* player);
 
-    virtual void init() {};
+    virtual void init() {}; /*LCOV_EXCL_LINE*/
 
     virtual void run();
 
-    virtual void update() {};
+    virtual void update() {}; /*LCOV_EXCL_LINE*/
 
 private:
     //Hardware
