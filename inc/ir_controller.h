@@ -5,10 +5,15 @@
 #include "ir_tx_hardware.h"
 #include "ir_rx_hardware.h"
 #include "gun_model.h"
+#include "player_model.h"
 
 class IRController {
 public:
-    IRController(IRTXHardware* ir_tx, IRRXHardware* ir_rx, GunModel* gun);
+    IRController(
+        IRTXHardware* ir_tx,
+        IRRXHardware* ir_rx,
+        GunModel* gun,
+        PlayerModel* player);
 
     virtual void init() {};
 
@@ -23,6 +28,7 @@ private:
 
     //Models
     GunModel*       m_gun;
+    PlayerModel*    m_player;
 };
 
 #endif //__IR_CONTROLLER_H__

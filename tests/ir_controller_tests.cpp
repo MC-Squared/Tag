@@ -2,6 +2,7 @@
 #include "gmock/gmock.h"
 #include "ir_tx_hardware_mock.h"
 #include "ir_rx_hardware_mock.h"
+#include "player_model_mock.h"
 #include "gun_model_mock.h"
 #include "ir_controller.h"
 
@@ -12,7 +13,11 @@ using ::testing::Return;
 class IRControllerTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-        ir_c = new IRController(&ir_tx_h_m, &ir_rx_h_m, &gun_m_m);
+        ir_c = new IRController(
+            &ir_tx_h_m,
+            &ir_rx_h_m,
+            &gun_m_m,
+            &player_m_m);
         ir_c->init();
     }
 
@@ -24,6 +29,7 @@ protected:
     NiceMock<IRTXHardwareMock>      ir_tx_h_m;
     NiceMock<IRRXHardwareMock>      ir_rx_h_m;
     NiceMock<GunModelMock>          gun_m_m;
+    NiceMock<PlayerModelMock>       player_m_m;
     IRController*                   ir_c;
 };
 
@@ -142,5 +148,21 @@ TEST_F(IRControllerTest, runAllowsHitOnlyInReloadingOrNormalMode)
     ir_c->run();
     ir_c->run();
     ir_c->run();
+    ir_c->run();
+}
+
+TEST_F(IRControllerTest, runUpdatesPlayerHealthOnHit)
+{
+    EXPECT_CALL(gun_m_m, get_gun_mode())
+        .WillOnce(Return(GUN_MODE_NORMAL));
+
+    EXPECT_CALL(ir_rx_h_m, has_bullet())
+        .WillRepeatedly(Return(true));
+
+    EXPECT_CALL(ir_rx_h_m, get_bullet())
+        .WillRepeatedly(Return(0));
+
+    EXPECT_CALL(player_m_m, decrease_health_by(_));
+
     ir_c->run();
 }

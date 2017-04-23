@@ -5,8 +5,6 @@ using ::testing::AtLeast;
 using ::testing::_;
 using ::testing::Return;
 
-//
-
 class GunModelTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
