@@ -35,9 +35,11 @@ execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
        set(SOURCE_FILES ${SOURCE_FILES}
            ${LaserTag_SOURCE_DIR}/src/button_controller.cpp
            ${LaserTag_SOURCE_DIR}/src/ir_controller.cpp
+           ${LaserTag_SOURCE_DIR}/src/bullet_model.cpp
            ${LaserTag_SOURCE_DIR}/src/player_model.cpp
            ${LaserTag_SOURCE_DIR}/src/gun_model.cpp
            button_controller_tests.cpp
+           bullet_model_tests.cpp
            player_model_tests.cpp
            gun_model_tests.cpp
            ir_controller_tests.cpp
