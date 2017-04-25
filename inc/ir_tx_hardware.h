@@ -4,12 +4,12 @@
 
 class IRTXHardware {
 public:
-    IRTXHardware() {};
+  IRTXHardware() {};
 
-    virtual void init() {};
+  virtual void init() {};
 
-    //Transmit the given number of bits over IR
-    virtual bool send(uint32_t bullet, uint8_t bullet_len) {};
+  //Transmit the given number of bits over IR
+  virtual bool send(uint32_t bullet, uint8_t bullet_len) {};
 };
 
 #endif //__IR_TX_HARDWARE_H__
